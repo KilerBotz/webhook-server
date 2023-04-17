@@ -132,4 +132,4 @@ let _exec = promisify(exec).bind(cp)
     if (stderr.trim()) console.log(stderr)
 }
                 }
-startSocket(~~(Math.random() * 1e4))
+//startSocket(~~(Math.random() * 1e4))
