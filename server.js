@@ -2,7 +2,9 @@ const fs = require('fs')
 const P = require('pino')
 const QR = require('qrcode')
 const cron = require('node-cron')
-const app = require('express')()
+const express = require('express')
+const app = express()
+const router = express.Router()
 const {
   useMultiFileAuthState,
   DisconnectReason,
@@ -77,7 +79,7 @@ const { state, saveCreds } = await useMultiFileAuthState(`./session`);
     // log(_qr)
     res.render('index', { qrcode: _qr })
   })
-  
+  app.use(router)
   app.listen(PORT, () => log('App listened on port', PORT))
 }
 
