@@ -99,7 +99,7 @@ let _exec = promisify(exec).bind(cp)
   })
   app.use(router)
   app.listen(PORT, () => log('App listened on port', PORT))
-}
+
 
 function log(...args) {
   return console.log('\u001b[105m[' + new Date().toLocaleTimeString('id', { timeZone: 'Asia/Jakarta' }) + ']\u001b[49m', ...args)
