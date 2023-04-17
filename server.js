@@ -98,13 +98,13 @@ let _exec = promisify(exec).bind(cp)
     //res.render('index', { qrcode: _qr })
   })
   app.use(router)
-  app.listen(8000, () => log('App listened'))
+  app.listen(3000, () => console.log('App listened'))
 
 
 function log(...args) {
   return console.log('\u001b[105m[' + new Date().toLocaleTimeString('id', { timeZone: 'Asia/Jakarta' }) + ']\u001b[49m', ...args)
 }
-cron.schedule(
+/*cron.schedule(
   "* * * * *",
   () => {
     resetsesi();
@@ -131,5 +131,5 @@ let _exec = promisify(exec).bind(cp)
     if (stdout.trim()) console.log(stdout)
     if (stderr.trim()) console.log(stderr)
 }
-                }
+                }*/
 //startSocket(~~(Math.random() * 1e4))
