@@ -1,13 +1,23 @@
 const express = require('express');
-const axios = require('axios')
+const axios = require('axios');
+const request = require('request');
 const app = express();
 const router = express.Router();
 app.get('/cosplay', async(req, res) => {
         let data = await fetchJson('https://raw.githubusercontent.com/Elainadev1140/resultsgirl/main/resultsgirl.json')
         let result = data[Math.floor(Math.random() * data.length)]
-        results = await getBuffer(result)
+	var requestSettings = {
+        url: result,
+        method: 'GET',
+        encoding: null
+        };
+        request(requestSettings, function (error, response, body) {
+        res.set('Content-Type', 'image/png');
+        res.send(body);
+    });
+        /*results = await getBuffer(result)
         res.set({'Content-Type': 'image/png'})
-        res.send(results)
+        res.send(results)*/
 })
 
 app.get('/loli', async(req, res) => {
