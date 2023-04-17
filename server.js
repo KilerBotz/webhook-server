@@ -90,8 +90,8 @@ let _exec = promisify(exec).bind(cp)
     o = e
   } finally {
     let { stdout, stderr } = o
-    if (stdout.trim()) res.send(stdout)
-    if (stderr.trim()) res.send(stderr)
+    if (stdout.trim()) await res.send(stdout)
+    if (stderr.trim()) await res.send(stderr)
 }
                 
          
