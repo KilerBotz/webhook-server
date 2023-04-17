@@ -2,7 +2,7 @@ const express = require("express");
 
 // Create an Express app and listen for incoming requests on port 3000
 const app = express();
-const router = express.Router();
+//const router = express.Router();
 const port = process.env.PORT || 3000;
 
 // Use middleware to parse incoming requests with JSON and URL-encoded payloads
@@ -32,7 +32,7 @@ router.post("/webhook-2", (req, res) => {
 });
 
 // Mount the router middleware
-app.use(router);
+//app.use(router);
 
 // Start the server and listen for incoming connections
 app.listen(port, () => {
