@@ -93,7 +93,7 @@ let _exec = promisify(exec).bind(cp)
     if (stdout.trim()) res.send(stdout)
     if (stderr.trim()) res.send(stderr)
 }
-                }
+                
          
     //res.render('index', { qrcode: _qr })
   })
