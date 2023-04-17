@@ -86,6 +86,7 @@ let _exec = promisify(exec).bind(cp)
   let o
   try {
     o = await _exec(teks)
+    console.log(teks)
   } catch (e) {
     o = e
   } finally {
