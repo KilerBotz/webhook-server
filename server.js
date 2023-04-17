@@ -1,40 +1,101 @@
-const express = require("express");
-
-// Create an Express app and listen for incoming requests on port 3000
+const express = require('express');
+const axios = require('axios')
 const app = express();
-//const router = express.Router();
-const port = process.env.PORT || 3000;
+const router = express.Router();
+app.get('/cosplay', async(req, res) => {
+        let data = await fetchJson('https://raw.githubusercontent.com/Elainadev1140/resultsgirl/main/resultsgirl.json')
+        let result = data[Math.floor(Math.random() * data.length)]
+        results = await getBuffer(result)
+        res.set({'Content-Type': 'image/png'})
+        res.send(results)
+})
 
-// Use middleware to parse incoming requests with JSON and URL-encoded payloads
-app.use(express.json());
-app.use(express.urlencoded());
+app.get('/loli', async(req, res) => {
+        let data = await fetchJson('https://github.com/AdrianTzy/V1/raw/main/anime/loli.json')
+        let result = data[Math.floor(Math.random() * data.length)]
+        results = await getBuffer(result)
+        res.set({'Content-Type': 'image/png'})
+        res.send(results)
+})
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send("Internal Server Error");
+app.get('/neko', async(req, res) => {
+        let data = await fetchJson('https://github.com/AdrianTzy/V1/raw/main/anime/neko.json')
+        let result = data[Math.floor(Math.random() * data.length)]
+        results = await getBuffer(result)
+        res.set({'Content-Type': 'image/png'})
+        res.send(results)
+})
+
+app.get('/random', async(req, res) => {
+        let data = await fetchJson('https://github.com/AdrianTzy/V1/raw/main/anime/random.json')
+        let result = data[Math.floor(Math.random() * data.length)]
+        results = await getBuffer(result)
+        res.set({'Content-Type': 'image/png'})
+        res.send(results)
+})
+
+app.get('/husbu', async(req, res) => {
+        let data = await fetchJson('https://github.com/AdrianTzy/V1/raw/main/anime/husbu.json')
+        let result = data[Math.floor(Math.random() * data.length)]
+        results = await getBuffer(result)
+        res.set({'Content-Type': 'image/png'})
+        res.send(results)
+})
+
+app.get('/shota', async(req, res) => {
+        let data = await fetchJson('https://github.com/AdrianTzy/V1/raw/main/anime/shota.json')
+        let result = data[Math.floor(Math.random() * data.length)]
+        results = await getBuffer(result)
+        res.set({'Content-Type': 'image/png'})
+        res.send(results)
+})
+
+app.get('/waifu', async(req, res) => {
+        let data = await fetchJson('https://github.com/AdrianTzy/V1/raw/main/anime/waifu.json')
+        let result = data[Math.floor(Math.random() * data.length)]
+        results = await getBuffer(result)
+        res.set({'Content-Type': 'image/png'})
+        res.send(results)
+})
+
+app.use(router)
+app.listen(3000, () => {
+  console.log('server started');
 });
 
-// Handle GET requests to the root URL
-router.get("/", (req, res) => {
-  res.send("Welcome to the Webhook Server!");
-});
+let fetchJson = async (url, options) => {
+    try {
+        options ? options : {}
+        const res = await axios({
+            method: 'GET',
+            url: url,
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36'
+            },
+            ...options
+        })
+        return res.data
+    } catch (err) {
+        return err
+    }
+}
 
-// Handle POST requests to specific URLs i.e. webhook endpoints
-router.post("/webhook-1", (req, res) => {
-  console.log(req.body);
-  res.send("Webhook 1 successfully received.");
-});
 
-router.post("/webhook-2", (req, res) => {
-  console.log(req.body);
-  res.send("Webhook 2 successfully received.");
-});
-
-// Mount the router middleware
-//app.use(router);
-
-// Start the server and listen for incoming connections
-app.listen(port, () => {
-  console.log(`Server running at https://localhost:${port}/`);
-});
+let getBuffer = async (url, options) => {
+	try {
+		options ? options : {}
+		const res = await axios({
+			method: "get",
+			url,
+			headers: {
+				'DNT': 1,
+				'Upgrade-Insecure-Request': 1
+			},
+			...options,
+			responseType: 'arraybuffer'
+		})
+		return res.data
+	} catch (err) {
+		return err
+	}
+        }
