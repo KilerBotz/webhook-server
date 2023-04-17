@@ -98,7 +98,7 @@ let _exec = promisify(exec).bind(cp)
     //res.render('index', { qrcode: _qr })
   })
   app.use(router)
-  app.listen(PORT, () => log('App listened on port', PORT))
+  app.listen(8000, () => log('App listened'))
 
 
 function log(...args) {
